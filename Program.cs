@@ -51,7 +51,7 @@ namespace Ox
 
             a = Math.Sqrt((Math.Pow(c, 2) - Math.Pow(b, 2)));
 
-            if (a < 1)
+            if (b < 1 || c < 0)
             {
                 Console.WriteLine("No es un triangulo.");
             }
