@@ -46,20 +46,37 @@ namespace Ox
         {
             double a, b, c;
 
-            c = Utils.AskForDouble("Ingrese Hipotenusa (c): ");
             b = Utils.AskForDouble("Ingrese el Cateto Opuesto (b): ");
+
+            if (b < 0)
+            {
+                Console.WriteLine("No puede ser una magnitud negativa.");
+                b = Utils.AskForDouble("Ingrese el Cateto Opuesto (b): ");
+            }
+
+            if (b == 0)
+            {
+                Console.WriteLine("No es un triangulo.");
+                b = Utils.AskForDouble("Ingrese el Cateto Opuesto (b): ");
+            }
+
+            c = Utils.AskForDouble("Ingrese Hipotenusa (c): ");
+         
+            if (c < 0)
+            {
+                Console.WriteLine("No puede ser una magnitud negativa.");
+                c = Utils.AskForDouble("Ingrese Hipotenusa (c): ");
+            }
+
+            if (c == 0)
+            {
+                Console.WriteLine("No es un triangulo.");
+                c = Utils.AskForDouble("Ingrese Hipotenusa (c): ");
+            }
 
             a = Math.Sqrt((Math.Pow(c, 2) - Math.Pow(b, 2)));
 
-            if (b < 1 || c < 0)
-            {
-                Console.WriteLine("No es un triangulo.");
-            }
-            else
-            {
-                Console.WriteLine("El Cateto Adyasente es: " + a);
-            }
-
+            Console.WriteLine("El Cateto Adyasente es: " + a);
         }
 
         public static void calculateB()
