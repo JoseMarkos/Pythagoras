@@ -10,9 +10,9 @@ namespace Ox
     {
         static void Main(string[] args)
         {
-            Menu menu = new Menu();
-            menu.SetAppName("Ox");
-            menu.SetDate("22.07.2019");
+            Box boxOptions = new Box();
+            boxOptions.SetBoxTitle("Ox");
+            boxOptions.SetDate("29.07.2019");
 
             string[] options =
             {
@@ -21,81 +21,29 @@ namespace Ox
                 "Calcular Hipotenusa"
             };
 
-            menu.RenderMenu(options);
+            boxOptions.RenderMenu(options);
+
 
             selectOption(options);
-            WantContinue("Seguir calculando ", menu, options);
-
+            WantContinue("Seguir calculando ", boxOptions, options);
         }
 
         // Pythagorean theorem
 
         public static void calculateC()
         {
-            double a, b, c;
+           
 
-            a = Utils.AskForDouble("Ingrese Cateto Adyacente (a): ");
-            b = Utils.AskForDouble("Ingrese Cateto Opuesto (b): ");
-
-            c = Math.Sqrt((Math.Pow(a, 2) + Math.Pow(b, 2)));
-
-            Console.WriteLine("La Hipotenusa es: " + c);
         }
 
         public static void calculateA()
         {
-            double a, b, c;
-
-            b = Utils.AskForDouble("Ingrese el Cateto Opuesto (b): ");
-
-            if (b < 0)
-            {
-                Console.WriteLine("No puede ser una magnitud negativa.");
-                b = Utils.AskForDouble("Ingrese el Cateto Opuesto (b): ");
-            }
-
-            if (b == 0)
-            {
-                Console.WriteLine("No es un triangulo.");
-                b = Utils.AskForDouble("Ingrese el Cateto Opuesto (b): ");
-            }
-
-            c = Utils.AskForDouble("Ingrese Hipotenusa (c): ");
-         
-            if (c < 0)
-            {
-                Console.WriteLine("No puede ser una magnitud negativa.");
-                c = Utils.AskForDouble("Ingrese Hipotenusa (c): ");
-            }
-
-            if (c == 0)
-            {
-                Console.WriteLine("No es un triangulo.");
-                c = Utils.AskForDouble("Ingrese Hipotenusa (c): ");
-            }
-
-            a = Math.Sqrt((Math.Pow(c, 2) - Math.Pow(b, 2)));
-
-            Console.WriteLine("El Cateto Adyasente es: " + a);
+            
         }
 
         public static void calculateB()
         {
-            double a, b, c; 
-
-            c = Utils.AskForDouble("Ingrese Hipotenusa (c): ");
-            a = Utils.AskForDouble("Ingrese Cateto Adyacente (a): ");
-
-            b = Math.Sqrt((Math.Pow(c, 2) - Math.Pow(a, 2)));
-
-            if (a < 1 || c < 0)
-            {
-                Console.WriteLine("No es un triangulo.");
-            }
-            else
-            {
-                Console.WriteLine("El Cateto Opuesto es: " + b);
-            }
+           
         }
 
         // Selection 
@@ -128,25 +76,24 @@ namespace Ox
             }
         }
 
-
         // Continue
 
-        public static void WantContinue(string message, Menu menu, string[] options)
+        public static void WantContinue(string message, Box menu, string[] options)
         {
             Console.WriteLine("");
             Console.WriteLine(message + "(y / other key)");
 
-            if (Console.ReadLine() == "y")
+            if (Console.ReadLine() == "n")
+            {
+                System.Environment.Exit(1);
+            }
+
+            else
             {
                 Console.Clear();
                 menu.RenderMenu(options);
                 selectOption(options);
                 WantContinue(message, menu, options);
-            }
-
-            else
-            {
-                System.Environment.Exit(1);
             }
         }
     }
