@@ -23,55 +23,53 @@ namespace Ox
 
             boxOptions.RenderMenu(options);
 
-
-            selectOption(options);
-            WantContinue("Seguir calculando ", boxOptions, options);
-        }
-
-        // Pythagorean theorem
-
-        public static void calculateC()
-        {
-           
-
-        }
-
-        public static void calculateA()
-        {
-            
-        }
-
-        public static void calculateB()
-        {
-           
+            SelectOption(options);
+            WantContinue("Seguir calculando? ", boxOptions, options);
         }
 
         // Selection 
 
-        public static void selectOption(string[] options)
+        public static void SelectOption(string[] options)
         {
             double input = Utils.AskForDouble("");
+            Pythagoras Ox = new Pythagoras();
 
             switch (input)
             {
                 case 1:
+                    Ox.AssingLeg("Opuesto");
+                    Ox.AssingH();
 
-                    calculateA();
-                    
+                    Ox.CalculateA();
+
+                    Console.WriteLine();
+                    Console.WriteLine("El cateto Adyacente es: " + Ox.GetA());
                     break;
 
                 case 2:
+                    Ox.AssingLeg("Adyacente");
+                    Ox.AssingH();
 
-                    calculateB();
+                    Ox.CalculateB();
+
+                    Console.WriteLine();
+                    Console.WriteLine("El cateto Opuesto es: " + Ox.GetB());
                     break;
 
                 case 3:
 
-                    calculateC();
+                    Ox.AssingA();
+                    Ox.AssingB();
+
+                    Ox.CalculateH();
+
+                    Console.WriteLine();
+                    Console.WriteLine("La Hipotenusa es: " + Ox.GetH());
                     break;
+
                 default:
                     Console.WriteLine("Ingrese una opcion valida!");
-                    selectOption(options);
+                    SelectOption(options);
                     break;
             }
         }
@@ -81,7 +79,7 @@ namespace Ox
         public static void WantContinue(string message, Box menu, string[] options)
         {
             Console.WriteLine("");
-            Console.WriteLine(message + "(y / other key)");
+            Console.WriteLine(message + "(y / n)");
 
             if (Console.ReadLine() == "n")
             {
@@ -92,7 +90,7 @@ namespace Ox
             {
                 Console.Clear();
                 menu.RenderMenu(options);
-                selectOption(options);
+                SelectOption(options);
                 WantContinue(message, menu, options);
             }
         }
