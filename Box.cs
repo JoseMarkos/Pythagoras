@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Ox
 {
-    class Menu
+    class Box
     {
-        public string appName;
-        public string author = "@joomlergt";
+        private string boxTitle;
+        private string author = "@joomlergt";
 
-        public string version = "1.0";
-        public char borderChar = '*';
-        public string date;
+        private string version = "1.1";
+        private char borderChar = '*';
+        private string date;
 
         public int limitWidth = 50;
 
@@ -21,9 +21,9 @@ namespace Ox
         {
             this.limitWidth = limit;
         }
-        public void SetAppName(string name)
+        public void SetBoxTitle(string title)
         {
-            this.appName = name;
+            this.boxTitle = title;
         }
         public void SetDate(string date)
         {
@@ -65,8 +65,9 @@ namespace Ox
 
             WriteHorizontalBorder();
 
-            Console.WriteLine(appName + " " + version);
+            Console.WriteLine(boxTitle + " " + version);
             Console.WriteLine(date);
+            Console.WriteLine(author);
             Console.WriteLine();
 
             for (int i = 0; i < items.Length; i++)
