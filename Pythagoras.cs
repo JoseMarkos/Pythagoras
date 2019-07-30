@@ -86,7 +86,6 @@ namespace Ox
 
             if (tmp < leg)
             {
-                Console.WriteLine(leg);
                 NotHypotenuseBiggest();
             }
 
@@ -129,7 +128,7 @@ namespace Ox
         private void NotPositiveSide()
         {
             Console.WriteLine();
-            Console.WriteLine("El lado de un triangulo no puede tener magnitud negativa.");
+            Console.WriteLine("La Hipotenusa no puede tener magnitud negativa.");
 
             AskForH();
         }
