@@ -11,7 +11,7 @@ namespace Ox
         private string boxTitle;
         private string author = "@joomlergt";
 
-        private string version = "1.1";
+        private string version = "1.1.1";
         private char borderChar = '*';
         private string date;
 
