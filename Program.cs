@@ -76,7 +76,7 @@ namespace Ox
 
         // Continue
 
-        public static void WantContinue(string message, Box menu, string[] options)
+        public static void WantContinue(string message, Box boxOp, string[] options)
         {
             Console.WriteLine("");
             Console.WriteLine(message + "(y / n)");
@@ -89,9 +89,9 @@ namespace Ox
             else
             {
                 Console.Clear();
-                menu.RenderMenu(options);
+                boxOp.RenderMenu(options);
                 SelectOption(options);
-                WantContinue(message, menu, options);
+                WantContinue(message, boxOp, options);
             }
         }
     }
