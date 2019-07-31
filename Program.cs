@@ -21,15 +21,29 @@ namespace Ox
                 "Calcular Hipotenusa"
             };
 
+            // Tarea 2
+
+            Queue<double> CatetosOpuestos = new Queue<double>();
+
+            Stack<double> CatetosAdyacentes = new Stack<double>();
+
+            List<double> Hipotenusas = new List<double>();
+
+            List<object> Lista = new List<object>();
+
+            //
+
+
             boxOptions.RenderMenu(options);
 
-            SelectOption(options);
-            WantContinue("Seguir calculando? ", boxOptions, options);
+            SelectOption(options, CatetosOpuestos, CatetosAdyacentes, Hipotenusas, Lista);
+            WantContinue("Seguir calculando? ", boxOptions, options, CatetosOpuestos, CatetosAdyacentes, Hipotenusas, Lista);
         }
 
+        
         // Selection 
 
-        public static void SelectOption(string[] options)
+        public static void SelectOption(string[] options, Queue<double> opuestos, Stack<double> adyacentes, List<double> hi, List<object> lista)
         {
             double input = Utils.AskForDouble("");
             Pythagoras Ox = new Pythagoras();
@@ -44,6 +58,12 @@ namespace Ox
 
                     Console.WriteLine();
                     Console.WriteLine("El cateto Adyacente es: " + Ox.GetA());
+
+                    // Tarea 2
+                    opuestos.Enqueue(Ox.GetLeg());
+                    adyacentes.Push(Ox.GetA());
+                    hi.Add(Ox.GetH());
+                    //
                     break;
 
                 case 2:
@@ -54,6 +74,12 @@ namespace Ox
 
                     Console.WriteLine();
                     Console.WriteLine("El cateto Opuesto es: " + Ox.GetB());
+                    
+                    // Tarea 2
+                    opuestos.Enqueue(Ox.GetB());
+                    adyacentes.Push(Ox.GetLeg());
+                    hi.Add(Ox.GetH());
+                    // 
                     break;
 
                 case 3:
@@ -65,18 +91,30 @@ namespace Ox
 
                     Console.WriteLine();
                     Console.WriteLine("La Hipotenusa es: " + Ox.GetH());
+                  
+                    // Tarea 2
+                    opuestos.Enqueue(Ox.GetB());
+                    adyacentes.Push(Ox.GetA());
+                    hi.Add(Ox.GetH());
+                    //
                     break;
 
                 default:
                     Console.WriteLine("Ingrese una opcion valida!");
-                    SelectOption(options);
+                    SelectOption(options, opuestos, adyacentes, hi, lista);
                     break;
             }
+
+            // Tarea 2
+            lista.Add(opuestos);
+            lista.Add(adyacentes);
+            lista.Add(hi);
+            //
         }
 
         // Continue
 
-        public static void WantContinue(string message, Box boxOp, string[] options)
+        public static void WantContinue(string message, Box boxOp, string[] options, Queue<double> opuestos, Stack<double> adyacentes, List<double> hi, List<object> lista)
         {
             Console.WriteLine("");
             Console.WriteLine(message + "(y / n)");
@@ -90,8 +128,8 @@ namespace Ox
             {
                 Console.Clear();
                 boxOp.RenderMenu(options);
-                SelectOption(options);
-                WantContinue(message, boxOp, options);
+                SelectOption(options, opuestos, adyacentes, hi, lista);
+                WantContinue(message, boxOp, options, opuestos, adyacentes, hi, lista);
             }
         }
     }
