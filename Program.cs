@@ -37,11 +37,6 @@ namespace Ox
             }
 
 
-            List<string> Options = new List<string>();
-
-
-            Options.Add($"{regSum(2, 4, 0)}");
-
             Console.WriteLine(renderHorizontalBorder(0, 4, "*"));
             Console.WriteLine();
 
@@ -61,6 +56,8 @@ namespace Ox
             Console.WriteLine(renderHorizontalBorder(0, 4, "*"));
 
             SelectOption();
+
+            Console.ReadKey();
         }
 
 
@@ -100,7 +97,15 @@ namespace Ox
 
         private static double FinallyValidation(int num, double leg)
         {
-            Console.WriteLine(num / leg);
+            /*
+            Console.WriteLine(num / (int)leg);
+
+            return leg; */
+
+            if (leg == 0)
+            {
+                Console.WriteLine(num / 0);
+            }
 
             return leg;
         }
@@ -108,11 +113,11 @@ namespace Ox
         private static double AskForLeg(string catetoName)
         {
             Console.WriteLine(catetoName);
-            var input = Console.ReadLine();
+            string input = Console.ReadLine();
 
             try
             {
-                return FinallyValidation(2, NotPositive(int.Parse(input)));
+                return FinallyValidation(2, NotPositive(double.Parse(input)));
             }
             catch (Exception ex)
             {
@@ -124,12 +129,11 @@ namespace Ox
         private static double AskForH(string catetoName, double leg)
         {
             Console.WriteLine(catetoName);
-
-            var input = Console.ReadLine();
+            string input = Console.ReadLine();
 
             try
             {
-                return FinallyValidation(2, NotHypotenuseDifferent(NotHypotenuseBiggest(NotPositive(int.Parse(input)), leg), leg));
+                return FinallyValidation(2, NotHypotenuseDifferent(NotHypotenuseBiggest(NotPositive(double.Parse(input)), leg), leg));
             }
 
             catch (Exception ex)
@@ -143,22 +147,38 @@ namespace Ox
         private static void SelectOption()
         {
             int input = int.Parse(Console.ReadLine());
+            double a, b, h;
 
             switch (input)
             {
                 case 1:
                     Console.WriteLine();
 
-                    double h = AskForH("Ingresa  H ", 6);
-                    Console.WriteLine(h);
+                    b = AskForLeg("Ingresa Cateto Opuesto");
+                    h = AskForH("Ingresa la Hiputenusa", b);
+                    a = PythagorasLeg(h, b);
 
-                    double b = AskForLeg("Ingresa un cateto opuesto ");
-                    Console.WriteLine(b);
+                    Console.WriteLine("El cateto adyacente es: " + a);
+                    break;
 
-                    double a = PythagorasLeg(h, b);
-
-                    Console.WriteLine(a);
+                case 2:
                     Console.WriteLine();
+
+                    a = AskForLeg("Ingresa Cateto Adyacente");
+                    h = AskForH("Ingresa la Hiputenusa", a);
+                    b = PythagorasLeg(h, a);
+
+                    Console.WriteLine("El cateto adyacente es: " + b);
+                    break;
+
+                case 3:
+                    Console.WriteLine();
+
+                    a = AskForLeg("Ingresa Cateto Adyacente");
+                    b = AskForLeg("Ingresa Cateto Opuesto");
+                    h = PythagorasH(a, b);
+
+                    Console.WriteLine("La Hipotenusa es: " + h);
                     break;
 
                 default:
