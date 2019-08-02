@@ -10,39 +10,12 @@ namespace Ox
     {
         static void Main(string[] args)
         {
-
-            // Set limitWidth as the potencial of base 2
-            // 2 ^ 3 = 8 characters
-
-            string renderHorizontalBorder(int start, int limitWidth, string border)
-            {
-                if (start > limitWidth)
-                {
-                    return border;
-                }
-
-                return renderHorizontalBorder(start + 1, limitWidth, $"{border}{border}");
-            }
-
-            // E. G.
-
-            double regSum(double start, double end, double acc)
-            {
-                if (start > end)
-                {
-                    return acc;
-                }
-
-                return regSum(start + 1, end, acc + start);
-            }
-
-
-            Console.WriteLine(renderHorizontalBorder(0, 4, "*"));
+            Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
             Console.WriteLine();
 
             Console.WriteLine("Ox");
-            Console.WriteLine("1.2.0");
-            Console.WriteLine("31.07.2019");
+            Console.WriteLine("2.0.0");
+            Console.WriteLine("01.08.2019");
 
             Console.WriteLine();
 
@@ -53,17 +26,20 @@ namespace Ox
             Console.WriteLine("3. Calcular Cateto Hipotenusa");
 
             Console.WriteLine();
-            Console.WriteLine(renderHorizontalBorder(0, 4, "*"));
+            Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
 
             SelectOption();
+            WantContinue("Do you want to continue? ");
 
             Console.ReadKey();
         }
 
-
+        // Equations
         private static double PythagorasH(double a, double b) => Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
 
         private static double PythagorasLeg(double h, double leg) => Math.Sqrt(Math.Pow(h, 2) - Math.Pow(leg, 2));
+
+        // Validations
 
         private static double NotPositive(double leg)
         {
@@ -97,11 +73,6 @@ namespace Ox
 
         private static double FinallyValidation(int num, double leg)
         {
-            /*
-            Console.WriteLine(num / (int)leg);
-
-            return leg; */
-
             if (leg == 0)
             {
                 Console.WriteLine(num / 0);
@@ -138,15 +109,27 @@ namespace Ox
 
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                // Console.WriteLine(ex.Message);
                 return AskForH(catetoName, leg);
             }
         }
 
+        // Set limitWidth as the potencial of base 2
+        // 2 ^ 3 = 8 characters
+
+        private static string RenderHorizontalBorder(int start, int limitWidth, string border)
+        {
+            if (start > limitWidth)
+            {
+                return border;
+            }
+
+            return RenderHorizontalBorder(start + 1, limitWidth, $"{border}{border}");
+        }
 
         private static void SelectOption()
         {
-            int input = int.Parse(Console.ReadLine());
+            double input = Utils.AskForDouble("");
             double a, b, h;
 
             switch (input)
@@ -182,7 +165,46 @@ namespace Ox
                     break;
 
                 default:
+                    Console.WriteLine("Ingrese una opcion valida!");
+                    SelectOption();
                     break;
+            }
+        }
+
+        // Continue
+        private static void WantContinue(string message)
+        {
+            Console.WriteLine("");
+            Console.WriteLine(message + "(y / n)");
+
+            if (Console.ReadLine() == "n")
+            {
+                System.Environment.Exit(1);
+            }
+
+            else
+            {
+                Console.Clear();
+                Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
+                Console.WriteLine();
+
+                Console.WriteLine("Ox");
+                Console.WriteLine("2.0.0");
+                Console.WriteLine("01.08.2019");
+
+                Console.WriteLine();
+
+                Console.WriteLine("Escoge una opcion:");
+                Console.WriteLine();
+                Console.WriteLine("1. Calcular Cateto Adyacente");
+                Console.WriteLine("2. Calcular Cateto Opuesto");
+                Console.WriteLine("3. Calcular Cateto Hipotenusa");
+
+                Console.WriteLine();
+                Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
+
+                SelectOption();
+                WantContinue(message);
             }
         }
     }
