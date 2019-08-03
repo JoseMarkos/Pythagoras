@@ -40,7 +40,7 @@ namespace Ox
             WantContinue("Seguir calculando? ", boxOptions, options, CatetosOpuestos, CatetosAdyacentes, Hipotenusas, Lista);
         }
 
-        
+
         // Selection 
 
         public static void SelectOption(string[] options, Queue<double> opuestos, Stack<double> adyacentes, List<double> hi, List<object> lista)
@@ -104,12 +104,6 @@ namespace Ox
                     SelectOption(options, opuestos, adyacentes, hi, lista);
                     break;
             }
-
-            // Tarea 2
-            lista.Add(opuestos);
-            lista.Add(adyacentes);
-            lista.Add(hi);
-            //
         }
 
         // Continue
@@ -121,6 +115,11 @@ namespace Ox
 
             if (Console.ReadLine() == "n")
             {
+                // Tarea 2
+                lista.Add(opuestos);
+                lista.Add(adyacentes);
+                lista.Add(hi);
+                //
                 System.Environment.Exit(1);
             }
 
