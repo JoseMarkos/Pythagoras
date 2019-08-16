@@ -48,7 +48,7 @@ namespace Ox
 
         private static double NotHypotenuseDifferent(double h, double leg)
         {
-            if (leg == h)
+            if (h - leg <= 0)
             {
                 return 0;
             }
@@ -58,7 +58,7 @@ namespace Ox
 
         private static double FinallyValidation(int num, double leg)
         {
-            if (leg == 0)
+            if (leg < 1)
             {
                 Console.WriteLine(num / 0);
             }
@@ -80,7 +80,7 @@ namespace Ox
             }
             catch (Exception ex)
             {
-                //Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
                 return AskForLeg(catetoName);
             }
         }
@@ -97,7 +97,7 @@ namespace Ox
 
             catch (Exception ex)
             {
-                // Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);
                 return AskForH(catetoName, leg);
             }
         }
@@ -159,7 +159,7 @@ namespace Ox
             }
         }
 
-        private static void ShowBox ()
+        private static void ShowBox()
         {
             Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
             Console.WriteLine();
