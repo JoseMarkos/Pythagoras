@@ -10,23 +10,7 @@ namespace Ox
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
-            Console.WriteLine();
-
-            Console.WriteLine("Ox");
-            Console.WriteLine("2.0.0");
-            Console.WriteLine("01.08.2019");
-
-            Console.WriteLine();
-
-            Console.WriteLine("Escoge una opcion:");
-            Console.WriteLine();
-            Console.WriteLine("1. Calcular Cateto Adyacente");
-            Console.WriteLine("2. Calcular Cateto Opuesto");
-            Console.WriteLine("3. Calcular Cateto Hipotenusa");
-
-            Console.WriteLine();
-            Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
+            ShowBox();
 
             SelectOption();
             WantContinue("Do you want to continue? ");
@@ -35,6 +19,7 @@ namespace Ox
         }
 
         // Equations
+
         private static double PythagorasH(double a, double b) => Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
 
         private static double PythagorasLeg(double h, double leg) => Math.Sqrt(Math.Pow(h, 2) - Math.Pow(leg, 2));
@@ -81,6 +66,9 @@ namespace Ox
             return leg;
         }
 
+
+        // Asking sides
+
         private static double AskForLeg(string catetoName)
         {
             Console.WriteLine(catetoName);
@@ -92,7 +80,7 @@ namespace Ox
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return AskForLeg(catetoName);
             }
         }
@@ -171,11 +159,33 @@ namespace Ox
             }
         }
 
+        private static void ShowBox ()
+        {
+            Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
+            Console.WriteLine();
+
+            Console.WriteLine("Ox");
+            Console.WriteLine("2.0.0");
+            Console.WriteLine("01.08.2019");
+
+            Console.WriteLine();
+
+            Console.WriteLine("Escoge una opcion:");
+            Console.WriteLine();
+            Console.WriteLine("1. Calcular Cateto Adyacente");
+            Console.WriteLine("2. Calcular Cateto Opuesto");
+            Console.WriteLine("3. Calcular Cateto Hipotenusa");
+
+            Console.WriteLine();
+            Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
+        }
+
         // Continue
+
         private static void WantContinue(string message)
         {
             Console.WriteLine("");
-            Console.WriteLine(message + "(y / n)");
+            Console.WriteLine(message + "[Y / n]");
 
             if (Console.ReadLine() == "n")
             {
@@ -185,23 +195,7 @@ namespace Ox
             else
             {
                 Console.Clear();
-                Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
-                Console.WriteLine();
-
-                Console.WriteLine("Ox");
-                Console.WriteLine("2.0.0");
-                Console.WriteLine("01.08.2019");
-
-                Console.WriteLine();
-
-                Console.WriteLine("Escoge una opcion:");
-                Console.WriteLine();
-                Console.WriteLine("1. Calcular Cateto Adyacente");
-                Console.WriteLine("2. Calcular Cateto Opuesto");
-                Console.WriteLine("3. Calcular Cateto Hipotenusa");
-
-                Console.WriteLine();
-                Console.WriteLine(RenderHorizontalBorder(0, 4, "*"));
+                ShowBox();
 
                 SelectOption();
                 WantContinue(message);
